@@ -4,5 +4,9 @@ export default function init(a) {
     </iframe>
   </div>`;
   a.insertAdjacentHTML('afterend', embed);
+  //const { queryparam } = a;
+  //const hoverPlay = !!(queryparam?.includes('chrome=false'));
+  embed.postMessage('mouseenter', '*', { type: 'mpcAction', action: 'play' });
+  embed.postMessage('mouseleave', '*', { type: 'mpcAction', action: 'pause' });
   a.remove();
 }

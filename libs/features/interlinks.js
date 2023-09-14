@@ -56,7 +56,7 @@ export default async function interlink(path, language, limit = 1000) {
       // set paragraph link limit: 1 every 40 words
       const paraLinks = p.querySelectorAll('a').length;
       const paraWords = p.textContent.split(/\s/).length;
-      const maxParaLinks = Math.floor(paraWords / 40) - paraLinks;
+      let maxParaLinks = Math.floor(paraWords / 40) - paraLinks;
       if (isExceptionLanguage && maxParaLinks === 0) {
         maxParaLinks = 1;
       }

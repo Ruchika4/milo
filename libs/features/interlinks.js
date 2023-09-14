@@ -57,7 +57,10 @@ export default async function interlink(path, language, limit = 1000) {
       const paraLinks = p.querySelectorAll('a').length;
       const paraWords = p.textContent.split(/\s/).length;
       const maxParaLinks = Math.floor(paraWords / 40) - paraLinks;
-      if (isExceptionLanguage || maxParaLinks > 0) {
+      if (isExceptionLanguage && maxParaLinks === 0) {
+        maxParaLinks = 1;
+      }
+      if (maxParaLinks > 0) {
         Array.from(p.childNodes)
         // filter out non text nodes
           .filter((node) => node.nodeType === Node.TEXT_NODE)

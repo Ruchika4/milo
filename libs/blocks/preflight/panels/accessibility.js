@@ -11,21 +11,21 @@ const content = signal({});
 async function checkAlt() {
   const images = document.querySelectorAll('img');
   const result = { ...altResult.value };
-  let altMissing;
-  let altValueMissing;
   const altValue = [];
   for (const image of images) {
+    let altMissing = false;
+    let altValueMissing = false;
     const imageDetail = {};
     if (!image.hasAttribute('alt')) {
       altMissing = true;
-      imageDetail.src = image.hasAttribute('src') ? image.getAttribute('src').split('?')[0] : 'No image src';
+      imageDetail.src = image.getAttribute('src')?.split('?')[0];
       imageDetail.altAttr = 'missing';
       imageDetail.altAttrValue = 'missing';
     } else {
       const resp = await fetch(image.alt, { method: 'HEAD' });
       if (!resp.ok) {
         altValueMissing = true;
-        imageDetail.src = image.hasAttribute('src') ? image.getAttribute('src').split('?')[0] : 'No image src';
+        imageDetail.src = image.getAttribute('src')?.split('?')[0];
         imageDetail.altAttrValue = 'missing';
         imageDetail.altAttr = 'Exist';
       }

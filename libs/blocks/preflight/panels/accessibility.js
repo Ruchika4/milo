@@ -33,5 +33,6 @@ export default function Accessibility() {
     <tr>${content.value[key]}</tr>
     `)}
     </tbody>
+    </table>
   </div>`;
 }

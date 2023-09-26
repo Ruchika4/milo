@@ -18,14 +18,16 @@ async function checkAlt() {
     const imageDetail = {};
     if (!image.hasAttribute('alt')) {
       altMissing = true;
-      imageDetail.src = image.getAttribute('src');
+      imageDetail.src = image.hasAttribute('src') ? image.getAttribute('src').split('?')[0] : 'No image src';
       imageDetail.altAttr = 'missing';
+      imageDetail.altAttrValue = 'missing';
     } else {
       const resp = await fetch(image.alt, { method: 'HEAD' });
       if (!resp.ok) {
         altValueMissing = true;
-        imageDetail.src = image.getAttribute('src');
+        imageDetail.src = image.hasAttribute('src') ? image.getAttribute('src').split('?')[0] : 'No image src';
         imageDetail.altAttrValue = 'missing';
+        imageDetail.altAttr = 'Exist';
       }
     }
     altValue.push(imageDetail);
@@ -34,7 +36,7 @@ async function checkAlt() {
   if (altValue.length) {
     imageGridHtml = "<table border='1|1'>";
     imageGridHtml += '<tr>';
-    imageGridHtml += '<th class=preflight-content-heading>Image rc</th>';
+    imageGridHtml += '<th class=preflight-content-heading>Image</th>';
     imageGridHtml += '<th class=preflight-content-heading>Alt Attribute</th>';
     imageGridHtml += '<th class=preflight-content-heading>Alt Value</th>';
     imageGridHtml += '</tr>';
@@ -49,7 +51,6 @@ async function checkAlt() {
     }
     imageGridHtml += '</table>';
   }
-  console.log(imageGridHtml);
 
   if (altMissing && altValueMissing) {
     result.icon = fail;

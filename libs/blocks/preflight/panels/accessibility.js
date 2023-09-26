@@ -11,13 +11,24 @@ async function checkAlt() {
       imagesWithoutAlt.push(img.getAttribute('src').split('?')[0]);
     }
   });
-  content.value = { image: { items: imagesWithoutAlt } };
+  if (!imagesWithoutAlt.length) {
+    imagesWithoutAlt.push('All images are valid.');
+  }
+  content.value = imagesWithoutAlt;
 }
 
 export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
+  <table>
+  <thead>
+  <th>Images</th>
+  </tr>
+  <tbody>
+  <Image image=${Object.values(content.value)}
+  </tbody>
+  </table>
   <div class=preflight-general-content>
     ${Object.values(content.value)}
   </div>`;

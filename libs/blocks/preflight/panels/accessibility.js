@@ -26,7 +26,7 @@ export default function Accessibility() {
   <th>Images</th>
   </tr>
   <tbody>
-  <Image image=${Object.values(content.value)}
+  <Image image=${Object.values(content.value)}/>
   </tbody>
   </table>
   <div class=preflight-general-content>

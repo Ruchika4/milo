@@ -30,7 +30,9 @@ async function checkAlt() {
         imageDetail.altAttr = 'Exist';
       }
     }
-    altValue.push(imageDetail);
+    if (altMissing || altValueMissing) {
+      altValue.push(imageDetail);
+    }  
   }
   let imageGridHtml = '';
   if (altValue.length) {

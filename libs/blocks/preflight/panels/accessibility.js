@@ -28,7 +28,7 @@ export default function Accessibility() {
       <div>Image Src</div>
     </div>
     ${Object.keys(content.value).map((key) => html`
-    <div>${content.value[key]}</div>
+    <Images images=${content.value[key]} ></Images>
     `)}
   </div>`;
 }

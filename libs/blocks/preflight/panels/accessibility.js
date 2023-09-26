@@ -24,7 +24,7 @@ export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
-  <div class=preflight-general-content>
+  <div>
   <table border='1|1'>
     <thead>
     <th>Image Src</th>
@@ -34,5 +34,6 @@ export default function Accessibility() {
     <tr>${content.value[key]}</tr>
     `)}
     </tbody>
+    </table>
   </div>`;
 }

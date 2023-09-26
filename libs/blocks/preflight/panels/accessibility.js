@@ -14,8 +14,8 @@ async function checkAlt() {
   let altMissing;
   let altValueMissing;
   const altValue = [];
-  const imageDetail = {};
   for (const image of images) {
+    const imageDetail = {};
     if (!image.hasAttribute('alt')) {
       altMissing = true;
       imageDetail.src = image.getAttribute('src');

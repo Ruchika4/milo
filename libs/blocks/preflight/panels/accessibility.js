@@ -1,5 +1,3 @@
-import { html, signal, useEffect } from '../../../deps/htm-preact.js';
-
 const content = signal({});
 
 async function checkAlt() {
@@ -17,13 +15,14 @@ async function checkAlt() {
     imagesWithoutAlt.push('All images are valid.');
   }
   content.value = imagesWithoutAlt;
+  Object.keys(content.value).map((key) => console.log(content.value[key]));
 }
 
 export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
-  <div>
+  <div class=preflight-general-content>
   <table border='1|1'>
     <thead>
     <th>Image Src</th>
@@ -33,6 +32,5 @@ export default function Accessibility() {
     <tr>${content.value[key]}</tr>
     `)}
     </tbody>
-    </table>
   </div>`;
 }

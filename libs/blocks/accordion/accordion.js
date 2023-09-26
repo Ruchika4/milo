@@ -3,6 +3,7 @@ import { decorateBlockAnalytics, decorateLinkAnalytics } from '../../martech/att
 
 const faq = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [] };
 
+/* Test Comment*/
 function setSEO(questions) {
   faq.mainEntity.push(questions.map(({ name, text }) => (
     { '@type': 'Question', name, acceptedAnswer: { text, '@type': 'Answer' } })));

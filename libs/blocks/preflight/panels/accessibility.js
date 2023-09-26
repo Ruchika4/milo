@@ -6,9 +6,11 @@ async function checkAlt() {
   const images = document.querySelectorAll('img');
   const imagesWithoutAlt = [];
   images.forEach((img) => {
+    let imageDetail = {};
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imagesWithoutAlt.push(img.getAttribute('src').split('?')[0]);
+      imageDetail = { src: img.getAttribute('src').split('?')[0] };
+      imagesWithoutAlt.push(imageDetail);
     }
   });
   if (!imagesWithoutAlt.length) {
@@ -25,8 +27,8 @@ export default function Accessibility() {
   <div class="preflight-content-heading">
       <div>Image Src</div>
     </div>
-    ${content.value.map((img) => html`
-    <div class=>${img}</div>
+    ${content.value.map((src) => html`
+    <div class=>${src}</div>
     `)}
   </div>`;
 }

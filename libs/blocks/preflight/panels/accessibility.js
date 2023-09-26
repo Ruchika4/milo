@@ -20,12 +20,15 @@ async function checkAlt() {
     }
   }
 
-  if (altMissing) {
+  if (altMissing && altValueMissing) {
     result.icon = fail;
-    result.description = 'Reason: Alt attribute miing';
-  } if (altValueMissing) {
+    result.description = 'Reason: Alt attribute and values are missing for one or more images on the page';
+  } else if (altValueMissing) {
     result.icon = fail;
-    result.description = 'Reason: No value assigned to alt attribute';
+    result.description = 'Reason: There are blank alt attributes for one or more images on the page';
+  } else if (altMissing) {
+    result.icon = fail;
+    result.description = 'Reason: Alt attribute missing for one or more images on the page';
   } else {
     result.icon = pass;
     result.description = 'Images are valid.';

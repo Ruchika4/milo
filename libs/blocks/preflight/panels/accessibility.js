@@ -1,3 +1,4 @@
+import { html, signal, useEffect } from '../../../deps/htm-preact.js';
 const content = signal({});
 
 
@@ -16,6 +17,7 @@ async function checkAlt() {
     imagesWithoutAlt.push('All images are valid.');
   }
   content.value = imagesWithoutAlt;
+  Object.keys(content.value).map((key) => console.log(content.value[key]));
 }
 
 export default function Accessibility() {

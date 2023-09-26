@@ -24,11 +24,14 @@ export default function Accessibility() {
 
   return html`
   <div class=preflight-general-content>
-  <div class="preflight-content-heading">
-      <div>Image Src</div>
-    </div>
-    ${Object.keys(content.value).map((key) => html`
-    <Images images=${content.value[key]} ></Images>
+  <table border='1|1'>
+    <thead>
+    <th>Image Src</th>
+    </thead>
+    <tbody>
+    ${Object.keys(content.value).map((key) => html`   
+    <tr>${content.value[key]}</tr>
     `)}
+    </tbody>
   </div>`;
 }

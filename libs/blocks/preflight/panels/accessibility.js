@@ -1,5 +1,6 @@
 const content = signal({});
 
+
 async function checkAlt() {
   const images = document.querySelectorAll('img');
   const imagesWithoutAlt = [];
@@ -15,7 +16,6 @@ async function checkAlt() {
     imagesWithoutAlt.push('All images are valid.');
   }
   content.value = imagesWithoutAlt;
-  //Object.keys(content.value).map((key) => console.log(content.value[key]));
 }
 
 export default function Accessibility() {

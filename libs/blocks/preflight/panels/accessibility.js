@@ -9,7 +9,7 @@ async function checkAlt() {
     let imageDetail = {};
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imageDetail = { src: img.getAttribute('src').split('?')[0] };
+      imageDetail = { img.getAttribute('src').split('?')[0] };
       imagesWithoutAlt.push(imageDetail);
     }
   });

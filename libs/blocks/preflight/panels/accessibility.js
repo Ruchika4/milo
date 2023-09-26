@@ -19,6 +19,6 @@ export default function Accessibility() {
 
   return html`
   <div class=preflight-general-content>
-    ${Object.keys(content.value)}
+    ${Object.values(content.value)}
   </div>`;
 }

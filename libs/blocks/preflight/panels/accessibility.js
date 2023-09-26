@@ -21,14 +21,6 @@ export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
-  <table>
-  <thead>
-  <th>Images</th>
-  </tr>
-  <tbody>
-  <Image image=${Object.values(content.value)}/>
-  </tbody>
-  </table>
   <div class=preflight-general-content>
     ${Object.values(content.value)}
   </div>`;

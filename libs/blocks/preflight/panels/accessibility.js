@@ -11,7 +11,7 @@ async function checkAlt() {
       imagesWithoutAlt.push(img.getAttribute('src').split('?')[0]);
     }
   });
-  content.value = imagesWithoutAlt;
+  content.value = { image: { items: imagesWithoutAlt } };
 }
 
 export default function Accessibility() {

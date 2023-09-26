@@ -27,7 +27,7 @@ export default function Accessibility() {
   <div class="preflight-content-heading">
       <div>Image Src</div>
     </div>
-    ${content.value.map((src) => html`
+    ${Object.values(content.value).map((src) => html`
     <div class=>${src}</div>
     `)}
   </div>`;

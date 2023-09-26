@@ -6,11 +6,11 @@ async function checkAlt() {
   const images = document.querySelectorAll('img');
   const imagesWithoutAlt = [];
   images.forEach((img) => {
-    let imageDetail = {};
+    //let imageDetail = {};
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imageDetail = { img.getAttribute('src').split('?')[0] };
-      imagesWithoutAlt.push(imageDetail);
+      //imageDetail = { img.getAttribute('src').split('?')[0] };
+      imagesWithoutAlt.push(img.getAttribute('src').split('?')[0]);
     }
   });
   if (!imagesWithoutAlt.length) {

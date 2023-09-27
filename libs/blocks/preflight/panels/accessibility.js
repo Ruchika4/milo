@@ -46,7 +46,7 @@ export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
-  <div class="accessibility-result">
+  <div class="seo-columns">
   <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
   </div>
   ${content.value.length > 0 && html`

@@ -351,3 +351,9 @@ tr:hover {
   margin-bottom: 72px;
 }
 
+.accessibility-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+}
+

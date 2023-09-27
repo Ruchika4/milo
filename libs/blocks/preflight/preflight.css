@@ -314,15 +314,11 @@ span.preflight-time {
   margin: 0;
 }
 
-/* Center the table horizontally on the page */
+/* Apply margin to the table for left and right spacing */
 table {
-  margin: 0 auto;
-  width: 50%; /* You can adjust the width as needed */
-}
-
-/* Remove the background color */
-table {
-  background-color: transparent;
+  margin-left: 20px;  /* Adjust as needed */
+  margin-right: 20px; /* Adjust as needed */
+  width: calc(100% - 40px); /* Adjust the width to account for the margins */
 }
 
 /* Style the table headers */

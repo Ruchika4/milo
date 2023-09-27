@@ -330,3 +330,9 @@ span.preflight-time {
   grid-template-columns: auto 1fr;
   gap: 12px;
 }
+
+.accessibility-result {
+  margin: 24px 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}

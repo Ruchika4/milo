@@ -314,21 +314,25 @@ span.preflight-time {
   margin: 0;
 }
 
-/* Style the table */
+/* Center the table horizontally on the page */
 table {
-  width: 100%;
-  border-collapse: collapse;
-  border: 1px solid #ccc;
+  margin: 0 auto;
+  width: 50%; /* You can adjust the width as needed */
 }
 
-/* Style table headers */
+/* Remove the background color */
+table {
+  background-color: transparent;
+}
+
+/* Style the table headers */
 th {
   text-align: left;
   padding: 8px;
   border: 1px solid #ccc;
 }
 
-/* Style table cells */
+/* Style the table cells */
 td {
   text-align: left;
   padding: 8px;

@@ -23,7 +23,7 @@ async function checkAlt() {
     result.description = 'Reason: All Image are valid';
   } else {
     result.icon = fail;
-    result.description = 'Reason: Alt attribute and values are missing for one or more images on the page';
+    result.description = 'Reason: Alt attribute or values are missing for below images on the page';
   }
   content.value = imagesWithoutAlt;
   altResult.value = result;
@@ -50,7 +50,7 @@ export default function Accessibility() {
     </div>
   <div>
   ${content.value.length > 0 && html`
-  <table border='1|1' width=100%>
+  <table border='1|1' width=75%>
     <thead>
     <th>Image Src</th>
     </thead>

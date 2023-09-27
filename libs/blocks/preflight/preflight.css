@@ -323,6 +323,7 @@ span.preflight-time {
 
 .accessibility-grid-item {
   margin-bottom: 72px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 .accessibility-item {

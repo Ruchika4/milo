@@ -313,3 +313,35 @@ span.preflight-time {
 .seo-item-description {
   margin: 0;
 }
+
+/* Style the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+
+/* Style table headers */
+th {
+  background-color: #f2f2f2;
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Style table cells */
+td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Style alternate rows */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Hover effect on rows */
+tr:hover {
+  background-color: #e0e0e0;
+}

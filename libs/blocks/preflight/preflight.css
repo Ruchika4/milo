@@ -323,7 +323,6 @@ table {
 
 /* Style table headers */
 th {
-  background-color: #f2f2f2;
   text-align: left;
   padding: 8px;
   border: 1px solid #ccc;
@@ -334,11 +333,6 @@ td {
   text-align: left;
   padding: 8px;
   border: 1px solid #ccc;
-}
-
-/* Style alternate rows */
-tr:nth-child(even) {
-  background-color: #f9f9f9;
 }
 
 /* Hover effect on rows */

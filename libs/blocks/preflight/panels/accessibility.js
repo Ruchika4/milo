@@ -53,11 +53,6 @@ export default function Accessibility() {
    <div class=preflight-general-content>
       ${Object.keys(content.value).map((key) => html`<Images name=${key} group=${content.value[key]} />`)}
     </div>
-  <div class="grid-container">
-    ${Object.keys(content.value).map((key) => html`   
-    <div class="grid-item">${content.value[key]}</div>
-    `)}
-    </div>
     `}
   </div>`;
 }

@@ -9,7 +9,7 @@ const content = signal({});
 const altResult = signal({ icon: DEF_ICON, title: 'Image alt value', description: DEF_DESC });
 
 async function checkAlt() {
-  const images = document.querySelectorAll('img');
+  const images = document.body.querySelectorAll('img');
   const imagesWithoutAlt = [];
   const result = { ...altResult.value };
   images.forEach((img) => {

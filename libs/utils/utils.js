@@ -4,6 +4,7 @@ const MILO_TEMPLATES = [
   '404',
   'featured-story',
 ];
+/*Test Comment*/
 const MILO_BLOCKS = [
   'accordion',
   'adobetv',

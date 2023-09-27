@@ -50,7 +50,7 @@ export default function Accessibility() {
     </div>
   <div>
   ${content.value.length > 0 && html`
-  <table border='1|1' width=75%>
+  <table border='1|1'>
     <thead>
     <th>Image Src</th>
     </thead>

@@ -46,9 +46,7 @@ export default function Accessibility() {
   useEffect(() => { checkAlt(); }, []);
 
   return html`
-  <div>
-    <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
-  </div>
+  <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
   ${content.value.length > 0 && html`
   <div class="accessibility-grid-container">
     <p class="preflight-content-heading">Images</p>

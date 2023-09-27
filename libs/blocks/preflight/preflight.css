@@ -339,3 +339,17 @@ td {
 tr:hover {
   background-color: #e0e0e0;
 }
+
+.accessibility-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 10px;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.accessibility-grid-item {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+

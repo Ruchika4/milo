@@ -32,7 +32,7 @@ async function checkAlt() {
 
 function AccessibilityItem({ icon, title, description }) {
   return html`
-    <div>
+    <div class="accessibility-item">
       <div class="result-icon ${icon}"></div>
       <div class=seo-item-text>
         <p class=seo-item-title>${title}</p>

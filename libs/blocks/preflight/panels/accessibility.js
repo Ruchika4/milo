@@ -50,16 +50,11 @@ export default function Accessibility() {
     </div>
   <div>
   ${content.value.length > 0 && html`
-  <table border='1|1'>
-    <thead>
-    <th>Image Src</th>
-    </thead>
-    <tbody>
+  <div class="grid-container">
     ${Object.keys(content.value).map((key) => html`   
-    <tr>${content.value[key]}</tr>
+    <div class="grid-item">${content.value[key]}</div>
     `)}
-    </tbody>
-    </table>
+    </div>
     `}
   </div>`;
 }

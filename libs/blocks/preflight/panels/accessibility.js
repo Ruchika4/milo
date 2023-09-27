@@ -49,12 +49,12 @@ export default function Accessibility() {
   <div>
         <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
   </div>
-  <div class="accessibility-grid-container">
-    <p class="preflight-content-heading">Images</p>
     ${content.value.length > 0 && html`
+    <div class="accessibility-grid-container">
+    <p class="preflight-content-heading">Images</p>
     <div class="accessibility-grid-item">
     ${Object.keys(content.value).map((key) => html`<div>${content.value[key]}</div>`)}
     </div>
-    `}
-  </div>`;
+    </div>
+    `}`;
 }

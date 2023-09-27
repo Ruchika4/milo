@@ -47,14 +47,12 @@ export default function Accessibility() {
 
   return html`
   <div>
-        <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
+    <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
   </div>
-    ${content.value.length > 0 && html`
-    <div class="accessibility-grid-container">
+  ${content.value.length > 0 && html`
+  <div class="accessibility-grid-container">
     <p class="preflight-content-heading">Images</p>
-    <div class="accessibility-grid-item">
-    ${Object.keys(content.value).map((key) => html`<div>${content.value[key]}</div>`)}
-    </div>
-    </div>
-    `}`;
+    ${Object.keys(content.value).map((key) => html`<div class="accessibility-grid-item">${content.value[key]}</div>`)}
+  </div>
+  `}`;
 }

@@ -49,10 +49,11 @@ export default function Accessibility() {
         <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
     </div>
   <div>
+  <p class="preflight-content-heading preflight-content-heading-edit">Images</p>
   ${content.value.length > 0 && html`
-   <div class=preflight-general-content>
-      ${Object.keys(content.value).map((key) => html`<div>${content.value[key]}</div>`)}
-    </div>
+  <div class=preflight-general-content>
+  ${Object.keys(content.value).map((key) => html`<div>${content.value[key]}</div>`)}
+</div>
     `}
   </div>`;
 }

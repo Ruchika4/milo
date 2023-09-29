@@ -19,7 +19,7 @@ async function checkAlt() {
     if (!alt || alt.trim() === '') {
       //let gridItem = createTag('div', { class: 'image-grid-item'});
       //gridItem.append(img.parentElement);
-      imagesWithoutAlt.push(gridItem);
+      imagesWithoutAlt.push(img.parentElement);
     }
   });
   if (!imagesWithoutAlt.length) {

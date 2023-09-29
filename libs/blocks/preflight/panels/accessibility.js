@@ -52,7 +52,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <div class="access-image-grid">
       <p class="preflight-content-heading">Images</p>
-      ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">${content.value[key]}</div>`)}
+      ${Object.keys(content.value).map((key) => console.log(content.value[key]); html`<div class="image-grid-item">${content.value[key]}</div>`)}
     </div>
     `}
   </div>`;  

@@ -17,7 +17,7 @@ async function checkAlt() {
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      let gridItem = document.createTag('div', { class: 'image-grid-item'});
+      let gridItem = createTag('div', { class: 'image-grid-item'});
       gridItem.append(img.parentElement);
       imagesWithoutAlt.push(gridItem);
     }

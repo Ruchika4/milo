@@ -27,6 +27,7 @@ async function checkAlt() {
     result.description = 'Reason: Alt attribute or values are missing for below images on the page';
   }
   content.value = imagesWithoutAlt;
+  Object.keys(content.value).map((key) => console.log(content.value[key]));
   altResult.value = result;
   return result.icon;
 }

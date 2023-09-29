@@ -353,15 +353,14 @@ span.preflight-time {
 }
 
 .access-image-grid-item {
-  width: 128px;
-  height: 128px;
-  object-fit: cover;
   border: solid white 4px;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
 }
 
 .access-image-grid-item img {
-  height: 100%;
-  width: 100%;
+  object-fit: cover;
 }
 
 .access-image-header {

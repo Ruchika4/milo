@@ -348,6 +348,7 @@ span.preflight-time {
  grid-gap: 8px; /* Adjust the spacing as needed */
  width: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
  height: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
+ margin-left: 72px; 
 }
 
 .image-grid picture {

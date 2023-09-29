@@ -354,7 +354,13 @@ span.preflight-time {
 .access-image-grid-item {
   width: 128px;
   height: 128px;
+  object-fit: cover;
   border: solid white 4px;
+}
+
+.access-image-grid-item img {
+  height: 100%;
+  width: 100%;
 }
 
 .access-image-header {

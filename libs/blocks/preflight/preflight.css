@@ -341,3 +341,11 @@ span.preflight-time {
 .accessibility-result {
   gap: 48px;
 }
+
+.access-image-grid {
+ display: grid;
+ grid-template-columns: repeat(2, 1fr);
+ grid-gap: 8px; /* Adjust the spacing as needed */
+ width: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
+ height: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
+}

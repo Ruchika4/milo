@@ -322,7 +322,6 @@ span.preflight-time {
 }
 
 .accessibility-grid-container {
-  display: grid;
   grid-gap: 10px;
   max-width: 100%;
   margin: 20px;

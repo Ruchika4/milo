@@ -314,6 +314,13 @@ span.preflight-time {
   margin: 0;
 }
 
+/*Accessibility css*/
+.access-columns {
+  margin: 24px 48px;
+  display: grid;
+  gap: 48px;
+}
+
 .accessibility-grid-container {
   display: grid;
   grid-gap: 10px;
@@ -323,6 +330,7 @@ span.preflight-time {
 
 .accessibility-grid-item {
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  margin-left: 72px;
 }
 
 .accessibility-item {

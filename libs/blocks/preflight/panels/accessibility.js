@@ -17,7 +17,9 @@ async function checkAlt() {
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imagesWithoutAlt.push(img.parentElement);
+      let gridItem = document.createTag('div' { class: 'image-grid-item'});
+      gridItem.append(img.parentElement);
+      imagesWithoutAlt.push(gridItem);
     }
   });
   if (!imagesWithoutAlt.length) {
@@ -53,7 +55,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <p class="image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => let gridItem = document.createTag('div' { class: 'image-grid-item'}); gridItem.append(content.value[key]))}
+      ${Object.keys(content.value).map((key) => content.value[key])}
     </div>
     `}
   </div>`;  

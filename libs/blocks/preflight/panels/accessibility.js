@@ -53,7 +53,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <p class="image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => const gridItem = document.createTag('div' { class: 'image-grid-item'}); gridItem.append(content.value[key]))}
+      ${Object.keys(content.value).map((key) => let gridItem = document.createTag('div' { class: 'image-grid-item'}); gridItem.append(content.value[key]))}
     </div>
     `}
   </div>`;  

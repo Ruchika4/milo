@@ -10,15 +10,15 @@ const altResult = signal({ icon: DEF_ICON, title: 'Image alt value', description
 
 async function checkAlt() {
   const main = document.querySelector('main');
-  const imagesWithoutAlt = main.querySelectorAll('img:not([alt])');
+  const images = main.querySelectorAll('img');
   const result = { ...altResult.value };
-  /*const imagesWithoutAlt = [];
+  const imagesWithoutAlt = [];
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imagesWithoutAlt.push(img.parentElement);
+      imagesWithoutAlt.push(img);
     }
-  });*/
+  });
   if (!imagesWithoutAlt.length) {
     result.icon = pass;
     result.description = 'Reason: All Image are valid';

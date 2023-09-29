@@ -317,11 +317,11 @@ span.preflight-time {
 /*Accessibility css*/
 .access-columns {
   margin: 24px 48px;
-  display: grid;
   gap: 48px;
 }
 
 .accessibility-grid-container {
+  display: grid;
   grid-gap: 10px;
   max-width: 100%;
   margin: 20px;

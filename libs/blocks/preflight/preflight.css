@@ -349,3 +349,9 @@ span.preflight-time {
  width: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
  height: 256px; /* (2 * 128px) + (1 * 8px) for spacing */
 }
+
+.image-grid picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

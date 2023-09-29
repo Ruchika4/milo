@@ -53,7 +53,7 @@ export default function Accessibility() {
     <p class="image-header">Images</p>
     <div class="access-image-grid">
       ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">
-        <img src="${content.value[key]}></img></div>`)}
+        <img src="${content.value[key]}"></img></div>`)}
     </div>
     `}
   </div>`;  

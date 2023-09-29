@@ -55,7 +55,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <p class="image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => content.value[key])}
+      ${Object.keys(content.value).map((key) => html`${content.value[key]})}
     </div>
     `}
   </div>`;  

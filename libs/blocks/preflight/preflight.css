@@ -351,14 +351,14 @@ span.preflight-time {
   margin-left: 72px;
 }
 
-.image-grid-item {
+.access-image-grid-item {
   width: 128px;
   height: 128px;
   object-fit: cover;
   border: solid white 4px;
 }
 
-.image-header {
+.access-image-header {
   text-transform: uppercase;
   font-weight: 700;
   margin-left: 72px;

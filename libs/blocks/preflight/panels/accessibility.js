@@ -11,8 +11,8 @@ const altResult = signal({ icon: DEF_ICON, title: 'Image alt value', description
 async function checkAlt() {
   const main = document.querySelector('main');
   const imagesWithoutAlt = main.querySelectorAll('img:not([alt])');
-  /*const imagesWithoutAlt = [];
   const result = { ...altResult.value };
+  /*const imagesWithoutAlt = [];
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {

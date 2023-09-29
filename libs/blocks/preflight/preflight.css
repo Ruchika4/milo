@@ -346,6 +346,8 @@ span.preflight-time {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 8px; /* Adjust the spacing as needed */
+  max-width: 100%;
+  margin: 20px;
   margin-left: 72px;
 }
 
@@ -354,6 +356,7 @@ span.preflight-time {
   height: 128px;
   object-fit: cover;
   border: solid white 4px;
+  margin-left: 72px;
 }
 
 .image-header {

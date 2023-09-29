@@ -354,7 +354,6 @@ span.preflight-time {
 .access-image-grid-item {
   width: 128px;
   height: 128px;
-  object-fit: contain;
   border: solid white 4px;
 }
 

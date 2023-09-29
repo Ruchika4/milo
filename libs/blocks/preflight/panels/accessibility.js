@@ -50,9 +50,9 @@ export default function Accessibility() {
   <div class="access-columns">
     <${AccessibilityItem} icon=${altResult.value.icon} title=${altResult.value.title} description=${altResult.value.description} />
     ${content.value.length > 0 && html`
-    <p class="image-header">Images</p>
+    <p class="access-image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">
+      ${Object.keys(content.value).map((key) => html`<div class="access-image-grid-item">
         <img src="${content.value[key]}"></img></div>`)}
     </div>
     `}

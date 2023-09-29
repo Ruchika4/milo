@@ -10,15 +10,15 @@ const altResult = signal({ icon: DEF_ICON, title: 'Image alt value', description
 
 async function checkAlt() {
   const main = document.querySelector('main');
-  const images = main.querySelectorAll('img');
-  const imagesWithoutAlt = [];
+  const imagesWithoutAlt = main.querySelectorAll('img:not([alt])');
+  /*const imagesWithoutAlt = [];
   const result = { ...altResult.value };
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
       imagesWithoutAlt.push(img.parentElement);
     }
-  });
+  });*/
   if (!imagesWithoutAlt.length) {
     result.icon = pass;
     result.description = 'Reason: All Image are valid';
@@ -52,7 +52,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <p class="image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">${console.log(content.value[key])}</div>`)}
+      ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">${content.value[key]}</div>`)}
     </div>
     `}
   </div>`;  

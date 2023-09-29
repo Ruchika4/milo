@@ -338,10 +338,6 @@ span.preflight-time {
   gap: 12px;
 }
 
-.accessibility-result {
-  gap: 48px;
-}
-
 .access-image-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);

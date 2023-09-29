@@ -1,4 +1,5 @@
 import { html, signal, useEffect } from '../../../deps/htm-preact.js';
+import { createTag } from '../../utils/utils.js';
 
 const DEF_ICON = 'purple';
 const DEF_DESC = 'Checking...';
@@ -16,7 +17,7 @@ async function checkAlt() {
   images.forEach((img) => {
     const alt = img.getAttribute('alt');
     if (!alt || alt.trim() === '') {
-      imagesWithoutAlt.push(img);
+      imagesWithoutAlt.push(img.parentElement);
     }
   });
   if (!imagesWithoutAlt.length) {
@@ -52,7 +53,7 @@ export default function Accessibility() {
     ${content.value.length > 0 && html`
     <p class="image-header">Images</p>
     <div class="access-image-grid">
-      ${Object.keys(content.value).map((key) => html`<div class="image-grid-item">${content.value[key]}</div>`)}
+      ${Object.keys(content.value).map((key) => const gridItem = document.createTag('div' { class: 'image-grid-item'}); gridItem.append(content.value[key]))}
     </div>
     `}
   </div>`;  

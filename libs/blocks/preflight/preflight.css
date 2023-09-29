@@ -355,3 +355,9 @@ span.preflight-time {
   height: 100%;
   object-fit: cover;
 }
+
+.image-header {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-left: 72px;
+}

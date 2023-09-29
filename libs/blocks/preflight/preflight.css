@@ -353,7 +353,7 @@ span.preflight-time {
   width: 128px;
   height: 128px;
   object-fit: cover;
-  float: left
+  border: solid white 4px;
 }
 
 .image-header {

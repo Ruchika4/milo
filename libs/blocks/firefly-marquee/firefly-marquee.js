@@ -180,7 +180,7 @@ const decorateBlockBg = (block, node) => {
 
 // [headingSize, bodySize, detailSize]
 const blockTypeSizes = {
-  interactiveMarquee: {
+  marquee: {
     small: ['xl', 'm', 'm'],
     medium: ['xl', 'm', 'm'],
     large: ['xxl', 'xl', 'l'],
@@ -191,7 +191,7 @@ const blockTypeSizes = {
 function decorateText(el, size) {
   const headings = el.querySelectorAll('h1, h2, h3, h4, h5, h6');
   const heading = headings[headings.length - 1];
-  const config = blockTypeSizes.interactiveMarquee[size];
+  const config = blockTypeSizes.marquee[size];
   const decorate = (headingEl, typeSize) => {
     headingEl.classList.add(`heading-${typeSize[0]}`);
     headingEl.nextElementSibling?.classList.add(`body-${typeSize[1]}`);
@@ -275,4 +275,25 @@ export default function init(el) {
   const iconArea = text.querySelector('.icon-area');
   if (iconArea?.childElementCount > 1) decorateMultipleIconArea(iconArea);
   extendButtonsClass(text);
+  if (el.classList.contains('split')) {
+    if (foreground && media) {
+      media.classList.add('bleed');
+      foreground.insertAdjacentElement('beforebegin', media);
+    }
+
+    let mediaCreditInner;
+    const txtContent = media?.lastChild.textContent.trim();
+    if (txtContent) {
+      mediaCreditInner = createTag('p', { class: 'body-s' }, txtContent);
+    } else if (media.lastElementChild?.tagName !== 'PICTURE') {
+      mediaCreditInner = media.lastElementChild;
+    }
+
+    if (mediaCreditInner) {
+      const mediaCredit = createTag('div', { class: 'media-credit container' }, mediaCreditInner);
+      el.appendChild(mediaCredit);
+      el.classList.add('has-credit');
+      media.lastChild.remove();
+    }
+  }
 }

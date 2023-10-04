@@ -5,7 +5,122 @@
 import { applyHoverPlay, decorateButtons, getBlockSize } from '../../utils/decorate.js';
 import { createTag } from '../../utils/utils.js';
 
-const decorateVideo = (container, video) => {
+function setFireflyPrompt(media) {
+  // Get all the element from media div
+  const allP = media.querySelectorAll('p');
+  // Create various options for the prompt
+  const fireflyOptions = createTag('div', { class: 'options' });
+  const textToImage = createTag('button', { class: 'options', id: 'textToImage' }, `${allP[0].innerText.split('|')[0]}`);
+  const generativeFill = createTag('button', { class: 'options', id: 'generativeFill' }, `${allP[2].innerText.split('|')[0]}`);
+  const textEffects = createTag('button', { class: 'options', id: 'textEffects' }, `${allP[4].innerText.split('|')[0]}`);
+
+  fireflyOptions.append(textToImage);
+  fireflyOptions.append(generativeFill);
+  fireflyOptions.append(textEffects);
+  media.append(fireflyOptions);
+  const textToImageButton = media.querySelector('#textToImage');
+  const generativeFillButton = media.querySelector('#generativeFill');
+  const textEffectsButton = media.querySelector('#textEffects');
+  textToImageButton.classList.add('selected');
+
+  /* Set the default image */
+  allP[3].classList.add('hide');
+  allP[5].classList.add('hide');
+
+  // Hide the text for media
+  allP[0].classList.add('hide');
+  allP[2].classList.add('hide');
+  allP[4].classList.add('hide');
+  // Create prompt
+  const fireflyPrompt = createTag('div', { class: 'overlay', id: 'fireflyprompt' });
+  const fireflyText = createTag('input', { type: 'text', id: 'fireflyinput', placeholder: `${allP[0].innerText.split('|')[1]}` });
+  const fireflyButton = createTag('button', { class: 'con-button blue button-xl button-justified-mobile', id: 'generate' }, `${allP[0].innerText.split('|')[2]}`);
+  fireflyPrompt.append(fireflyText);
+  fireflyPrompt.append(fireflyButton);
+  media.append(fireflyPrompt);
+  const generateButton = media.querySelector('#generate');
+  generateButton.addEventListener('click', () => {
+    const inputValue = media.querySelector('input')?.value;
+    if (textToImage.classList.contains('selected')) {
+      // eslint-disable-next-line no-restricted-globals
+      location.href = `https://firefly.adobe.com/generate/images?prompt=${inputValue}`;
+    }
+    if (textEffectsButton.classList.contains('selected')) {
+      // eslint-disable-next-line no-restricted-globals
+      location.href = `https://firefly.adobe.com/generate/font-styles?prompt=${inputValue}`;
+    }
+  });
+
+  /* Handle action on click of each firefly option button */
+
+  textToImageButton.addEventListener('click', () => {
+    textToImageButton.classList.add('selected');
+    generativeFillButton.classList.remove('selected');
+    textEffectsButton.classList.remove('selected');
+
+    allP[1].classList.remove('hide');
+    allP[3].classList.add('hide');
+    allP[5].classList.add('hide');
+
+    const genFillButtonTemp = media.querySelector('#genFill');
+    if (genFillButtonTemp) genFillButtonTemp.remove();
+    const fireflyPromptTemp = media.querySelector('#fireflyprompt');
+    fireflyPromptTemp.classList.remove('genfill');
+    fireflyPromptTemp.classList.add('overlay');
+    fireflyPromptTemp.append(fireflyText);
+    fireflyPromptTemp.append(fireflyButton);
+    fireflyText.setAttribute('placeholder', `${allP[0].innerText.split('|')[1]}`);
+  });
+
+  generativeFillButton.addEventListener('click', () => {
+    textToImageButton.classList.remove('selected');
+    generativeFillButton.classList.add('selected');
+    textEffectsButton.classList.remove('selected');
+
+    allP[1].classList.add('hide');
+    allP[3].classList.remove('hide');
+    allP[5].classList.add('hide');
+
+    const fireflyTextTemp = media.querySelector('#fireflyinput');
+    const fireflyButtonTemp = media.querySelector('#generate');
+    const fireflyPromptTemp = media.querySelector('#fireflyprompt');
+    fireflyTextTemp.remove();
+    fireflyButtonTemp.remove();
+    fireflyPromptTemp.classList.remove('overlay');
+    fireflyPromptTemp.classList.add('genfill');
+    const genFillButton = createTag('button', { class: 'con-button blue button-xl button-justified-mobile', id: 'genFill' }, `${allP[2].innerText.split('|')[2]}`);
+    fireflyPromptTemp.append(genFillButton);
+    genFillButton.addEventListener('click', () => {
+      // eslint-disable-next-line no-restricted-globals
+      location.href = 'https://firefly.adobe.com/upload/inpaint';
+    });
+  });
+
+  textEffectsButton.addEventListener('click', () => {
+    textToImageButton.classList.remove('selected');
+    generativeFillButton.classList.remove('selected');
+    textEffectsButton.classList.add('selected');
+
+    allP[1].classList.add('hide');
+    allP[3].classList.add('hide');
+    allP[5].classList.remove('hide');
+
+    const genFillButtonTemp = media.querySelector('#genFill');
+    if (genFillButtonTemp) genFillButtonTemp.remove();
+    const fireflyTextTemp = media.querySelector('#fireflyinput');
+    if (fireflyTextTemp) fireflyText.setAttribute('placeholder', 'Tiger Fur');
+    else {
+      const fireflyPromptTemp = media.querySelector('#fireflyprompt');
+      fireflyPromptTemp.classList.remove('genfill');
+      fireflyPromptTemp.classList.add('overlay');
+      fireflyText.setAttribute('placeholder', `${allP[4].innerText.split('|')[1]}`);
+      fireflyPromptTemp.append(fireflyText);
+      fireflyPromptTemp.append(fireflyButton);
+    }
+  });
+}
+
+const decorateVideo = (container, video, isInteractive) => {
   if (video.nodeName === 'A' && video.href.includes('.mp4')) {
     // no special attrs handling
     container.innerHTML = `<video preload="metadata" playsinline autoplay muted loop>
@@ -24,6 +139,9 @@ const decorateVideo = (container, video) => {
   }
   applyHoverPlay(container.firstElementChild);
   container.classList.add('has-video');
+  if (isInteractive) {
+    setFireflyPrompt(container);
+  }
 };
 
 const decorateBlockBg = (block, node) => {
@@ -107,7 +225,7 @@ function extendButtonsClass(text) {
   buttons.forEach((button) => { button.classList.add('button-justified-mobile'); });
 }
 
-const decorateImage = (media) => {
+const decorateImage = (media, isInteractive) => {
   media.classList.add('image');
 
   const imageLink = media.querySelector('a');
@@ -117,10 +235,14 @@ const decorateImage = (media) => {
     imageLink.textContent = '';
     imageLink.append(picture);
   }
+  if (isInteractive) {
+    setFireflyPrompt(media);
+  }
 };
 
 export default function init(el) {
   const isLight = el.classList.contains('light');
+  const isInteractive = el.classList.contains('large');
   if (!isLight) el.classList.add('dark');
   const children = el.querySelectorAll(':scope > div');
   const foreground = children[children.length - 1];
@@ -137,10 +259,10 @@ export default function init(el) {
   if (media) {
     media.classList.add('media');
     const video = media.querySelector('video, a[href*=".mp4"]');
-    if (video) {
-      decorateVideo(media, video);
+    if (video && !isInteractive) {
+      decorateVideo(media, video, isInteractive);
     } else {
-      decorateImage(media);
+      decorateImage(media, isInteractive);
     }
   }
 

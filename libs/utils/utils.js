@@ -72,6 +72,7 @@ const MILO_BLOCKS = [
   'z-pattern',
   'share',
   'reading-time',
+  'firefly-marquee',
 ];
 const AUTO_BLOCKS = [
   { adobetv: 'https://video.tv.adobe.com' },

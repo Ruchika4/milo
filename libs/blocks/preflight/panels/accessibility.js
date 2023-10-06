@@ -29,7 +29,6 @@ async function checkAlt() {
   content.value = imagesWithoutAlt;
   Object.keys(content.value).map((key) => console.log(content.value[key]));
   altResult.value = result;
-  return result.icon;
 }
 
 function AccessibilityItem({ icon, title, description }) {

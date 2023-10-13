@@ -10,7 +10,7 @@ Milo is a shared set of features and services to power Franklin-based websites o
 
 ### TL;DR
 1. Clone this repo to your computer.
-1. Install the [Helix CLI](https://github.com/adobe/helix-cli): `sudo npm install -g @adobe/aem-cli`
+1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `sudo npm install -g @adobe/aem-cli`
 1. In a terminal, run `aem up` this repo's folder.
 1. Start coding.
 
@@ -18,7 +18,7 @@ Milo is a shared set of features and services to power Franklin-based websites o
 1. Fork this repo.
 1. Install the [Helix Bot](https://github.com/apps/helix-bot) on your forked repo.
 1. Clone your forked repo down to your computer.
-1. Install the [Helix CLI](https://github.com/adobe/helix-cli) using your terminal: `sudo npm install -g @adobe/helix-cli`
+1. Install the [AEM CLI](https://github.com/adobe/helix-cli) using your terminal: `sudo npm install -g @adobe/helix-cli`
 1. In a terminal, run `aem up` your repo's folder on your computer. It will open a browser.
 1. Open your repo's folder in your favorite code editor and start coding.
 

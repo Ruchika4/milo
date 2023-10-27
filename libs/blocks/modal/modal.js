@@ -45,7 +45,6 @@ function closeModal(modal) {
       document.body.classList.remove('disable-scroll');
       mod.nextElementSibling.remove();
     }
-    }
     if (mod.classList.contains('dialog-modal')) {
       mod.remove();
     }

@@ -16,7 +16,7 @@
 
 .table > .row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 50%);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 .table .col {

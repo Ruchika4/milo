@@ -533,6 +533,10 @@ header.global-navigation {
     display: none;
   }
 
+  .table:not(.merch) .col-heading.col-1 {
+    display: block;
+  }
+
   .table:not(.merch) .section-row-title {
     grid-row: 1;
     grid-column: 1 / x;

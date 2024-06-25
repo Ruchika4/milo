@@ -370,6 +370,7 @@ header.global-navigation {
 }
 
 .feds-utilities {
+  position: relative;
   display: flex;
   align-items: center;
   padding: 0 var(--feds-gutter);
@@ -565,8 +566,9 @@ header.global-navigation {
 
   .feds-navItem--megaMenu .feds-popup {
     right: 0;
-    justify-content: center;
     padding: 40px 0 0;
+    max-height: calc(100vh - 100%);
+    overflow: auto;
   }
 
   [dir = "rtl"] .feds-navItem--megaMenu .feds-popup {
@@ -642,10 +644,6 @@ header.global-navigation {
 
   .feds-search-trigger:hover svg path {
     fill: var(--feds-color-link--hover--light);
-  }
-
-  .feds-utilities {
-    padding: 0;
   }
 
   /* Breadcrumbs */

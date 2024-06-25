@@ -24,6 +24,7 @@ import globalNavigationMock from './mocks/global-navigation.plain.js';
 import globalNavigationActiveMock from './mocks/global-navigation-active.plain.js';
 import globalNavigationWideColumnMock from './mocks/global-navigation-wide-column.plain.js';
 import globalNavigationCrossCloud from './mocks/global-navigation-cross-cloud.plain.js';
+import { getConfig } from '../../../tools/send-to-caas/send-utils.js';
 
 const ogFetch = window.fetch;
 
@@ -34,7 +35,7 @@ describe('global navigation', () => {
   before(() => {
     document.head.innerHTML = `<link rel="icon" href="/libs/img/favicons/favicon.ico" size="any">
     <script src="https://auth.services.adobe.com/imslib/imslib.min.js" type="javascript/blocked" data-loaded="true"></script>
-    <script src="https://stage.adobeccstatic.com/unav/1.0/UniversalNav.js" type="javascript/blocked" data-loaded="true"></script>
+    <script src="https://stage.adobeccstatic.com/unav/1.1/UniversalNav.js" type="javascript/blocked" data-loaded="true"></script>
     `;
   });
 
@@ -71,12 +72,15 @@ describe('global navigation', () => {
     });
 
     it("should log when there's issues within onReady", async () => {
+      const ogIms = window.adobeIMS;
       const gnav = await createFullGlobalNavigation({});
       sinon.stub(gnav, 'decorateProfile').callsFake(() => {
         throw new Error('error');
       });
+      window.adobeIMS = { isSignedInUser: () => true };
       await gnav.imsReady();
       expect(window.lana.log.getCalls().find((c) => c.args[0].includes('issues within onReady'))).to.exist;
+      window.adobeIMS = ogIms;
     });
 
     it('should log when IMS signIn method is not available', async () => {
@@ -86,6 +90,21 @@ describe('global navigation', () => {
       document.querySelector(`${selectors.signInDropdown} ${selectors.signIn}`).click();
       expect(window.lana.log.getCalls().find((c) => c.args[0].includes('IMS signIn method not available'))).to.exist;
       window.adobeIMS = ogIms;
+    });
+
+    it('should send LANA log when profile call in decorateProfile fails', async () => {
+      const gnav = await createFullGlobalNavigation();
+      sinon.restore();
+      sinon.stub(window, 'fetch').callsFake((url) => {
+        if (url.includes('/profile')) return mockRes({ payload: null, ok: false, status: 400 });
+        return null;
+      });
+      window.adobeIMS = {
+        isSignedInUser: () => true,
+        getAccessToken: () => 'accessToken',
+      };
+      await gnav.decorateProfile();
+      expect(window.lana.log.getCalls().find((c) => c.args[0].includes('decorateProfile has failed to fetch profile data'))).to.exist;
     });
   });
 
@@ -522,6 +541,9 @@ describe('global navigation', () => {
         templateActiveElem.setAttribute('href', window.location.href);
         await createFullGlobalNavigation({ globalNavigation: template.innerHTML });
         const markupActiveElem = document.querySelector(targetSelector);
+        expect(markupActiveElem.getAttribute('role')).to.equal('link');
+        expect(markupActiveElem.getAttribute('aria-disabled')).to.equal('true');
+        expect(markupActiveElem.getAttribute('aria-current')).to.equal('page');
         expect(markupActiveElem.closest(selectors.activeNavItem) instanceof HTMLElement).to.be.true;
       });
 
@@ -1270,6 +1292,7 @@ describe('global navigation', () => {
       it('should reload unav on viewport change', async () => {
         await createFullGlobalNavigation({ unavContent: 'on' });
         await setViewport(viewports.mobile);
+        isDesktop.dispatchEvent(new Event('change'));
         await clock.runAllAsync();
         expect(window.UniversalNav.reload.getCall(0)).to.exist;
       });
@@ -1402,6 +1425,75 @@ describe('global navigation', () => {
       expect(
         fetchStub.calledOnceWith('https://www.stage.adobe.com/federal/path/to/gnav.plain.html'),
       ).to.be.true;
+    });
+
+    it('fetches navigation saved in sessionStorage', async () => {
+      const dynamicNavOn = toFragment`<meta name="dynamic-nav" content="on">`;
+      const conf = getConfig();
+      setConfig({ dynamicNavKey: 'milo', ...conf });
+      document.head.append(dynamicNavOn);
+      window.sessionStorage.setItem('dynamicNavKey', 'milo');
+      window.sessionStorage.setItem('gnavSource', '/some-path');
+      await initGnav(document.body.querySelector('header'));
+      expect(
+        fetchStub.calledOnceWith('/some-path.plain.html'),
+      ).to.be.true;
+    });
+
+    it('does not fetch from sessionStorage url when dyanmicNavKey is not present', async () => {
+      const dynamicNavOn = toFragment`<meta name="dynamic-nav" content="on">`;
+      document.head.append(dynamicNavOn);
+      document.body.replaceChildren(toFragment`<header class="global-navigation"></header>`);
+      window.sessionStorage.setItem('dynamicNavKey', 'milo');
+      window.sessionStorage.setItem('gnavSource', '/some-path');
+      await initGnav(document.body.querySelector('header'));
+      expect(
+        fetchStub.calledOnceWith('http://localhost:2000/gnav.plain.html'),
+      ).to.be.true;
+    });
+  });
+
+  describe('Dynamic nav', () => {
+    describe('Breadcrumbs', () => {
+      it('should not decorate breadcrumbs when dynamic nav is active', async () => {
+        const dynamicNavOn = toFragment`<meta name="dynamic-nav" content="on">`;
+        document.head.append(dynamicNavOn);
+        document.body.replaceChildren(toFragment`<header class="global-navigation"></header>`);
+        window.sessionStorage.setItem('dynamicNavKey', 'milo');
+        window.sessionStorage.setItem('gnavSource', '/some-path');
+        await initGnav(document.body.querySelector('header'));
+        const breadcrumbs = document.querySelector('.feds-breadcrumbs');
+        expect(breadcrumbs).to.be.null;
+      });
+    });
+  });
+
+  describe('decorateAppPrompt', () => {
+    it('should not load webapp prompt resources', async () => {
+      document.head.innerHTML = `<meta name="app-prompt" content="off" />
+      <link rel="icon" href="/libs/img/favicons/favicon.ico" size="any" />
+      <script src="https://auth.services.adobe.com/imslib/imslib.min.js" type="javascript/blocked" data-loaded="true"></script>
+      <script src="https://stage.adobeccstatic.com/unav/1.1/UniversalNav.js" type="javascript/blocked" data-loaded="true"></script>
+      `;
+      const gnav = await createFullGlobalNavigation({});
+      gnav.decorateAppPrompt();
+      const weAppPrompt = document.head.querySelector('link[href$="/webapp-prompt.css"]');
+      expect(!!weAppPrompt).to.be.false;
+    });
+
+    it('should load webapp prompt resources', async () => {
+      document.head.innerHTML = `<meta name="app-prompt" content="on" />
+      <meta name="app-prompt-entitlement" content="firefly-web-usage" />
+      <meta name="app-prompt-path" content="https://dismiss-pep--milo--adobecom.hlx.page/drafts/raghavs/pep-prompt-content"/>
+      <link rel="icon" href="/libs/img/favicons/favicon.ico" size="any" />
+      <script src="https://auth.services.adobe.com/imslib/imslib.min.js" type="javascript/blocked" data-loaded="true"></script>
+      <script src="https://stage.adobeccstatic.com/unav/1.1/UniversalNav.js" type="javascript/blocked" data-loaded="true"></script>
+      `;
+      const gnav = await createFullGlobalNavigation({});
+      window.adobeIMS = { isSignedInUser: () => true };
+      gnav.decorateAppPrompt();
+      const weAppPrompt = document.head.querySelector('link[href$="/webapp-prompt.css"]');
+      expect(!!weAppPrompt).to.be.true;
     });
   });
 });
